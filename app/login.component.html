@@ -1,0 +1,111 @@
+<alert *ngFor="let alert of alerts.alerts" [type]="alert.type" dismissOnTimeout="3000" dismissible="true">
+  {{ alert?.msg }}
+</alert>
+
+<div class="wrapper">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <h4 class="modal-title">
+          <img id="imageresource">
+          <b>Taiga Task Activity Reports</b>
+        </h4>
+
+        <span>
+          <i>Enter your Taiga project name, username and password, and then select the members and date range to generate activity reports.</i>
+        </span>
+
+      </div>
+
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="form-group">
+
+            <div class="col-xs-6">
+              <label>Project Name:</label>
+              <input [(ngModel)]="dlgModel.projectname" class="form-control" type="text" placeholder="Taiga Project" autofocus />
+            </div>
+
+            <div class="col-xs-6">
+              <label>Project URL:</label>
+              <input [(ngModel)]="dlgModel.projecturl" class="form-control" type="text" placeholder="http://example.com" autofocus />
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+
+            <div class="col-xs-6">
+              <label>Username:</label>
+              <input [(ngModel)]="dlgModel.username" class="form-control" type="text" placeholder="taiga" />
+            </div>
+
+            <div class="col-xs-6">
+              <label>Password:</label>
+              <input [(ngModel)]="dlgModel.password" class="form-control" type="password" />
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+
+            <div class="col-xs-6">
+              <label>Project Members:</label>
+              <br>
+              <div class="btn-group">
+                <label [(ngModel)]="checkModel.duane" class="btn btn-primary" btnCheckbox>Duane</label>
+                <label [(ngModel)]="checkModel.troje" class="btn btn-primary" btnCheckbox>Troje</label>
+                <label [(ngModel)]="checkModel.bfey" class="btn btn-primary" btnCheckbox>Brett</label>
+                <label [(ngModel)]="checkModel.richbl" class="btn btn-primary" btnCheckbox>Rich</label>
+              </div>
+            </div>
+
+            <div class="col-xs-6">
+              <label>Include Incomplete Tasks?</label>
+              <br>
+              <div class="btn-group">
+                <label [(ngModel)]="dlgModel.radio" class="btn btn-primary" btnRadio=1>Yes</label>
+                <label [(ngModel)]="dlgModel.radio" class="btn btn-primary" btnRadio=0>No</label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row row-last">
+          <div class="form-group">
+
+            <div class="col-xs-6">
+              <label>Start Date:</label>
+              <datepicker [(ngModel)]="dtStart" (click)="onClickDateStart()" [showWeeks]="false"></datepicker>
+            </div>
+
+            <div class="col-xs-6">
+              <label>End Date:</label>
+              <datepicker [(ngModel)]="dtEnd" [minDate]="dtMinDate" [showWeeks]="false"></datepicker>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <div id="release-version">
+          <a href="https://github.com/richbl?tab=repositories">v0.7.0</a>
+        </div>
+
+        <button class="btn btn-warning" type="button" (click)="onClickReset()">Reset</button>
+        <button class="btn btn-primary" [disabled]="validateDlg()" type="button" (click)="onClickOK()">OK</button>
+      </div>
+
+    </div>
+  </div>
+</div>

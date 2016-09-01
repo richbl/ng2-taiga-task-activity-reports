@@ -1,0 +1,44 @@
+/*dialog*/
+
+body {
+  background: #eee !important;
+}
+
+.wrapper {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.row {
+  padding-bottom: 25px;
+}
+
+.row-last {
+  padding-bottom: 0px;
+}
+
+
+/*logo*/
+
+#imageresource {
+  content: url(img/logo.png);
+  margin-right: 10px;
+}
+
+
+/*version*/
+
+#release-version {
+  float: left;
+  color: #737373;
+  font-style: italic;
+  line-height: 34px;
+}
+
+
+/*charting*/
+
+chart {
+  display: block;
+  padding: 10px;
+}

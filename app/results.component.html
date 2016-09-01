@@ -1,0 +1,5 @@
+<alert *ngFor="let alert of alerts.alerts" [type]="alert.type" dismissOnTimeout="3000" dismissible="true">
+  {{ alert?.msg }}
+</alert>
+
+<chart *ngFor="let elem of chartObjects" [options]="elem"></chart>
