@@ -1,3 +1,5 @@
+[![Known Vulnerabilities](https://snyk.io/test/github/richbl/ng2-taiga-task-activity-reports/badge.svg)](https://snyk.io/test/github/richbl/ng2-taiga-task-activity-reports)
+
 # Ng2-Taiga-Task-Activity-Reports
 
 This web-based application works in conjunction with an Agile project management platform called [Taiga](http://taiga.io "Taiga project management platform"). Its purpose is to generate a custom visual report on Taiga tasks on a per-user basis, and includes data analytics such as:
