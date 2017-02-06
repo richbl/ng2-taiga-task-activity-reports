@@ -4,10 +4,10 @@ import {Injectable} from '@angular/core';
 export class DateTimeService {
 
   private dtModel = {
-    minDate: null,
+    minDate: new Date(null),
     maxDate: new Date(2020, 5, 22),
-    dtStart: null,
-    dtEnd: null,
+    dtStart: new Date(null),
+    dtEnd: new Date(null),
     dtOptions: {
       formatYear: 'yy',
       startingDay: 1
@@ -34,7 +34,7 @@ export class DateTimeService {
    * ----------------------------------------------------------------------------------
    *
    */
-  public setStartDate(startDate) {
+  public setStartDate(startDate: Date) {
     this.dtModel.dtStart = startDate;
   };
 
@@ -42,7 +42,7 @@ export class DateTimeService {
    * ----------------------------------------------------------------------------------
    *
    */
-  public setEndDate(endDate) {
+  public setEndDate(endDate: Date) {
     this.dtModel.dtEnd = endDate;
   };
 
@@ -84,9 +84,9 @@ export class DateTimeService {
    * ----------------------------------------------------------------------------------
    * Convert date to specific Taiga-formatted datestring
    */
-  public toTaigaFormat(d) {
+  public toTaigaFormat(d: any) {
 
-    function pad(n) {
+    function pad(n: any) {
       return n < 10 ? '0' + n : n
     }
 

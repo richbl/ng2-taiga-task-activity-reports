@@ -1,20 +1,17 @@
-import {Component} from '@angular/core';
-import {Router} from '@angular/router-deprecated';
-import {AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
-import {CHART_DIRECTIVES} from 'angular2-highcharts';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 import {Alerts} from './alerts.service';
 import {TaigaAPIServices} from './taigaapi.service';
 
 @Component({
   selector: 'login',
-  directives: [CHART_DIRECTIVES, AlertComponent],
   templateUrl: 'app/results.component.html'
 })
 
-export class Results {
+export class Results implements OnInit {
 
-  chartObjects: HighchartsOptions = [];
+  chartObjects: Object = [];
 
   /**
    * ----------------------------------------------------------------------------------
@@ -28,9 +25,19 @@ export class Results {
    */
   ngOnInit() {
 
+    // TODO
+    console.log("zzzz");
+
     if (!this.taigaAPI.hasAuthToken()) {
-      this.router.navigate(['Login']);
+      console.log("----> HEAD TO LOGIN"); // TODO
+      this.router.navigate(['/login']);
     };
+
+    // TODO
+    console.log("XXXXX");
+
+    var zz = this.taigaAPI.getTaigaParams();
+    console.log(zz);
 
     this.alerts.clearAlerts();
 
@@ -43,7 +50,7 @@ export class Results {
    * ----------------------------------------------------------------------------------
    * Callback function on completion of processUsers()
    */
-  plotChart(self, index) {
+  plotChart(self: any, index: number) {
     self.chartObjects[index] = self.taigaAPI.getChartObjects(index);
   };
 

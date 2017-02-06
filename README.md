@@ -1,5 +1,3 @@
-[![Known Vulnerabilities](https://snyk.io/test/github/richbl/ng2-taiga-task-activity-reports/badge.svg)](https://snyk.io/test/github/richbl/ng2-taiga-task-activity-reports)
-
 # Ng2-Taiga-Task-Activity-Reports
 
 This web-based application works in conjunction with an Agile project management platform called [Taiga](http://taiga.io "Taiga project management platform"). Its purpose is to generate a custom visual report on Taiga tasks on a per-user basis, and includes data analytics such as:
@@ -38,7 +36,7 @@ This repository is based on the [Angular 2-Quickstart](https://github.com/valor-
 
 ### Angular Framework
 Node.js and npm are essential to Angular 2 development. <a href="https://docs.npmjs.com/getting-started/installing-node" target="_blank" title="Installing Node.js and updating npm"> Get them now</a> if they're not already installed on your machine.
- 
+
 **Verify that you are running at least node `v5.x.x` and npm `3.x.x`**
 by running `node -v` and `npm -v` in a terminal/console window.
 Older versions produce errors.
@@ -77,7 +75,7 @@ npm install
 
 ### Start the Localhost Server
 
-The `npm start` command first compiles the application, 
+The `npm start` command first compiles the application,
 then simultaneously re-compiles and runs the `lite-server`.
 Both the compiler and the server watch for file changes.
 

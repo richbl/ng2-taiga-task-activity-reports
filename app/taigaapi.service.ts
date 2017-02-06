@@ -22,7 +22,7 @@ export class TaigaAPIServices {
     userID: null as string // user ID of current user (derived)
   };
 
-  private chartObjects: HighchartsOptions = [];
+  private chartObjects: Object = [];
 
   private self: number = null;
   private callback: Function = null;
@@ -33,7 +33,7 @@ export class TaigaAPIServices {
    * ----------------------------------------------------------------------------------
    *
    */
-  public getChartObjects(index): HighchartsOptions {
+  public getChartObjects(index: number): Object {
     return this.chartObjects[index];
   };
 
@@ -41,7 +41,7 @@ export class TaigaAPIServices {
    * ----------------------------------------------------------------------------------
    * Set params used by Taiga.io API
    */
-  public setTaigaParams(params) {
+  public setTaigaParams(params: any) {
 
     this.taigaParams.website = params.website;
     this.taigaParams.projectName = params.projectName;
@@ -55,11 +55,16 @@ export class TaigaAPIServices {
 
   };
 
+  // TODO
+  public getTaigaParams(): any {
+    return this.taigaParams;
+  }
+
   /**
    * ----------------------------------------------------------------------------------
    * Get taiga AUTH_TOKEN used in all subsequent taiga API calls
    */
-  public getAuthToken(self, callback) {
+  public getAuthToken(self: any, callback: any) {
 
     this.httpPost(this.taigaParams.website + '/api/v1/auth', {
       "type": "normal",
@@ -83,6 +88,10 @@ export class TaigaAPIServices {
    *
    */
   public clearAuthToken() {
+
+    // TODO
+    console.log("CLEARED AuthToken");
+
     this.taigaParams.authToken = null;
   };
 
@@ -98,12 +107,12 @@ export class TaigaAPIServices {
    * ----------------------------------------------------------------------------------
    * Get taiga project ID from project name
    */
-  public getProjectIDfromName(self, callback) {
+  public getProjectIDfromName(self: any, callback: any) {
 
     this.httpGet(this.taigaParams.website + '/api/v1/projects')
       .subscribe(
       (res) => {
-        var result = res.filter(item => item.name == this.taigaParams.projectName);
+        var result = res.filter((item: any) => item.name == this.taigaParams.projectName);
 
         if (result[0] === undefined) {
           this.alerts.showAlert("Unable to locate project name: " + this.taigaParams.projectName, 2);
@@ -124,17 +133,17 @@ export class TaigaAPIServices {
  * ----------------------------------------------------------------------------------
  * Get taiga user(s)
  */
-  processUsers(self, callback) {
+  processUsers(self: any, callback: any) {
 
     // set callback to notify completion of processing
     this.self = self;
     this.callback = callback;
 
-    (this.taigaParams.users).forEach(function(userName, index) {
+    (this.taigaParams.users).forEach(function(userName: string, index: number) {
 
       this.getUserID(this.taigaParams, {
         "userName": userName, // user name
-        "index": index, // index of user used for displaying into HTML divs // TODO
+        "index": index, // index of user used for displaying into HTML divs
         "userID": 0, // user ID (derived)
       });
 
@@ -146,12 +155,12 @@ export class TaigaAPIServices {
    * ----------------------------------------------------------------------------------
    * Get username id
    */
-  getUserID(taigaParams, userParams) {
+  getUserID(taigaParams: any, userParams: any) {
 
     this.httpGet(taigaParams.website + '/api/v1/users?project=' + taigaParams.projectID)
       .subscribe(
       (res) => {
-        var result = res.filter(item => item.username == userParams.userName);
+        var result = res.filter((item: any) => item.username == userParams.userName);
 
         userParams.userID = result[0].id;
         this.alerts.showAlert("User ID retrieval for " + userParams.userName + " succeeded.", 0);
@@ -167,7 +176,7 @@ export class TaigaAPIServices {
    * ----------------------------------------------------------------------------------
    * Get user stories
    */
-  getUserStories(taigaParams, userParams, callback) {
+  getUserStories(taigaParams: any, userParams: any, callback: any) {
 
     // include/exclude incomplete (in progress) tasks in userstories query
     var closedTasks = "";
@@ -178,12 +187,12 @@ export class TaigaAPIServices {
     this.httpGet(taigaParams.website + '/api/v1/userstories?project=' + taigaParams.projectID + '\&assigned_to=' + userParams.userID + closedTasks)
       .subscribe(
       (res) => {
-        var newItem = [];
+        var newItem: any = [];
         var callbackCount = res.length;
         this.alerts.showAlert("User stories retrieval succeeded.", 0);
 
         // build newItem array from JSON returns
-        (res).forEach(function(item, index) {
+        (res).forEach(function(item: any, index: number) {
 
           // check if story date is within requested date range
           if ((item.modified_date < taigaParams.startDate) || (item.modified_date > taigaParams.endDate)) {
@@ -196,9 +205,9 @@ export class TaigaAPIServices {
             // get custom fields (actual_points) and include in final JSON return
             // if no attributes_values, then set to null (user didn't set a value)
             this.getCustomFields(taigaParams, userParams, item.id)
-              .map(res => res.json())
+              .map((res: any) => res.json())
               .subscribe(
-              (res) => {
+              (res: any) => {
                 var actualPoints = res.attributes_values[2];
 
                 if (actualPoints === undefined) {
@@ -221,14 +230,14 @@ export class TaigaAPIServices {
                   callback(this, taigaParams, userParams, newItem);
                 };
               },
-              (err) => {
+              (err: any) => {
                 this.alerts.showAlert("Unable to retrieve user story custom fields.", 2);
               });
           };
         }.bind(this)); // function call inside new context);
       }),
 
-      (err) => {
+      (err: any) => {
         this.alerts.showAlert("Unable to retrieve user stories.", 2);
       };
 
@@ -238,7 +247,7 @@ export class TaigaAPIServices {
    * ----------------------------------------------------------------------------------
    * Get user story custom fields (e.g,. actual_points field)
    */
-  getCustomFields(taigaParams, userParams, storyID) {
+  getCustomFields(taigaParams: any, userParams: any, storyID: any) {
 
     var authHeader = new Headers();
     authHeader.append('Authorization', 'Bearer ' + taigaParams.authToken);
@@ -253,10 +262,10 @@ export class TaigaAPIServices {
  * ----------------------------------------------------------------------------------
  * Process JSON results for highcharts
  */
-  processResults(data) {
+  processResults(data: any) {
 
     // sort tasks by completion date
-    data.sort(function(obj1, obj2) {
+    data.sort(function(obj1: any, obj2: any) {
 
       const MAX_TIMESTAMP = 8640000000000000;
       var a_date, b_date: Date;
@@ -276,7 +285,7 @@ export class TaigaAPIServices {
    * ----------------------------------------------------------------------------------
    * Create highcharts categories from JSON results
    */
-  createResultsCategories(data) {
+  createResultsCategories(data: any) {
 
     var arrayLength = data.length;
     var categories = [];
@@ -298,7 +307,7 @@ export class TaigaAPIServices {
  * ----------------------------------------------------------------------------------
  * Create highcharts series from JSON results
  */
-  createResultsSeries(data) {
+  createResultsSeries(data: any) {
 
     var arrayLength = data.length;
     var estimatedPoints = [];
@@ -349,7 +358,7 @@ export class TaigaAPIServices {
    * ----------------------------------------------------------------------------------
    * Get and process the resultng JSON file for highcharts (hc)
    */
-  getResults(self, taigaParams, userParams, json) {
+  getResults(self: any, taigaParams: any, userParams: any, json: any) {
 
     var results = self.processResults(json);
     var hcCategories = self.createResultsCategories(results);
@@ -364,7 +373,7 @@ export class TaigaAPIServices {
  * ----------------------------------------------------------------------------------
  * Set chart plotting options for highcharts object
  */
-  plotChart(taigaParams, userParams, categories, series, date, data) {
+  plotChart(taigaParams: any, userParams: any, categories: any, series: any, date: any, data: any) {
 
     this.chartObjects[userParams.index] = ({
       title: {
@@ -405,7 +414,7 @@ export class TaigaAPIServices {
    * ----------------------------------------------------------------------------------
    * Simple wrapper around http.post()
    */
-  private httpPost(url, data) {
+  private httpPost(url: string, data: any) {
 
     var headers = new Headers({ 'Content-Type': 'application/json' });
     var options = new RequestOptions({ headers: headers });
@@ -419,7 +428,7 @@ export class TaigaAPIServices {
    * ----------------------------------------------------------------------------------
    * Simple wrapper around http.get()
    */
-  private httpGet(url) {
+  private httpGet(url: string) {
 
     var authHeader = new Headers();
     authHeader.append('Authorization', 'Bearer ' + this.taigaParams.authToken);

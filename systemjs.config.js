@@ -1,24 +1,41 @@
-/**
- * System configuration for Angular 2 samples
- * Adjust as necessary for your application needs.
- */
 (function(global) {
   // map tells the System loader where to look for things
   var map = {
-    'moment': 'node_modules/moment/moment.js',
-    'app':                        'app',
-    '@angular':                   'node_modules/@angular',
-    'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
-    'rxjs':                       'node_modules/rxjs',
-    'angular2-highcharts':        'node_modules/angular2-highcharts/dist',
-    'highcharts/highstock.src':   'node_modules/highcharts/highstock.js',
+    'app': 'app',
+    '@angular': 'node_modules/@angular',
+    'rxjs': 'node_modules/rxjs',
+    'moment': 'node_modules/moment',
+    'ng2-bootstrap': 'node_modules/ng2-bootstrap',
+    'angular2-highcharts': 'node_modules/angular2-highcharts/dist',
+    'highcharts': 'node_modules/highcharts'
+
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
-    'app':                        { main: 'boot.js',  defaultExtension: 'js' },
-    'rxjs':                       { defaultExtension: 'js' },
-    'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
-    'angular2-highcharts' :       { main: 'index',format: 'cjs', defaultExtension: 'js' },    
+    'app': {
+      main: 'main.js',
+      defaultExtension: 'js'
+    },
+    'rxjs': {
+      defaultExtension: 'js'
+    },
+    'ng2-bootstrap': {
+      format: 'cjs',
+      main: 'bundles/ng2-bootstrap.umd.js',
+      defaultExtension: 'js'
+    },
+    'angular2-highcharts': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    'highcharts': {
+      main: 'highcharts.js',
+      defaultExtension: 'js'
+    },
+    'moment': {
+      main: 'moment.js',
+      defaultExtension: 'js'
+    },
   };
   var ngPackageNames = [
     'common',
@@ -34,11 +51,17 @@
   ];
   // Individual files (~300 requests):
   function packIndex(pkgName) {
-    packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' };
+    packages['@angular/' + pkgName] = {
+      main: 'index.js',
+      defaultExtension: 'js'
+    };
   }
   // Bundled (~40 requests):
   function packUmd(pkgName) {
-    packages['@angular/'+pkgName] = { main: '/bundles/' + pkgName + '.umd.js', defaultExtension: 'js' };
+    packages['@angular/' + pkgName] = {
+      main: '/bundles/' + pkgName + '.umd.js',
+      defaultExtension: 'js'
+    };
   }
   // Most environments should use UMD; some (Karma) need the individual index files
   var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;

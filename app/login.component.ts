@@ -1,9 +1,7 @@
-import {Component} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {Router} from '@angular/router-deprecated';
+import {Component, OnInit} from '@angular/core';
 import {Headers, RequestOptions} from '@angular/http';
+import {Router} from '@angular/router';
 
-import {AlertComponent, DATEPICKER_DIRECTIVES, BUTTON_DIRECTIVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
 
 import {Dlg} from './dlg.service';
 import {DateTimeService} from './datetime.service';
@@ -12,16 +10,13 @@ import {TaigaAPIServices} from './taigaapi.service';
 
 @Component({
   selector: 'login',
-  directives: [DATEPICKER_DIRECTIVES, CORE_DIRECTIVES, BUTTON_DIRECTIVES, AlertComponent],
-  viewProviders: [BS_VIEW_PROVIDERS],
-  providers: [Dlg, DateTimeService],
   templateUrl: 'app/login.component.html',
 })
 
-export class Login {
+export class Login implements OnInit {
 
-  private dlgModel = null;
-  private checkModel = null;
+  private dlgModel: any = null;
+  private checkModel: any = null;
 
   private dtStart: Date = null;
   private dtEnd: Date = null;
@@ -29,7 +24,6 @@ export class Login {
 
   /**
    * ----------------------------------------------------------------------------------
-   *
    */
   constructor(private taigaAPI: TaigaAPIServices, private alerts: Alerts, private dlg: Dlg, private dt: DateTimeService, private router: Router) {
 
@@ -42,13 +36,20 @@ export class Login {
 
     this.dlgModel.radio = '1';
 
+    // TODO
+    this.dlgModel.projecturl = "https://public.businesslearninginc.com";
+    this.dlgModel.projectname = "CERTAIN Hub Reporting";
+    this.dlgModel.username = "richbl";
+    this.dlgModel.password = "acm44655!!";
+
   };
 
   /**
    * ----------------------------------------------------------------------------------
-   *
    */
   ngOnInit() {
+
+    console.log("NOW IN LOGIN"); // TODO
 
     this.alerts.clearAlerts();
     this.taigaAPI.clearAuthToken();
@@ -119,7 +120,7 @@ export class Login {
    * ----------------------------------------------------------------------------------
    * Callback function on completion of getAuthToken()
    */
-  checkProjectName(self) {
+  checkProjectName(self: any) {
     self.taigaAPI.getProjectIDfromName(self, self.showResults);
   };
 
@@ -127,8 +128,8 @@ export class Login {
    * ----------------------------------------------------------------------------------
    * Callback function on completion of getProjectIDfromName()
    */
-  showResults(self) {
-    self.router.navigate(['Results']);
+  showResults(self: any) {
+    self.router.navigate(['/results']);
   };
 
   /**

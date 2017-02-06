@@ -1,6 +1,4 @@
 import {Component} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {RouteConfig, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 
 import {Login} from './login.component';
 import {Results} from './results.component';
@@ -9,14 +7,28 @@ import {TaigaAPIServices} from './taigaapi.service';
 
 @Component({
   selector: 'my-app',
-  directives: [Login, ROUTER_DIRECTIVES],
-  providers: [ROUTER_PROVIDERS, Alerts, TaigaAPIServices],
-  template: `<router-outlet></router-outlet>`
+  template: `
+    <router-outlet></router-outlet>
+  `,
 })
+export class AppComponent {
 
-@RouteConfig([
-  { path: '/login', name: 'Login', component: Login, useAsDefault: true },
-  { path: '/result', name: 'Results', component: Results }
-])
+  public dt: Date = new Date();
+  private minDate: Date = null;
+  private events: Array<any>;
+  private tomorrow: Date;
+  private afterTomorrow: Date;
+  private formats: Array<string> = ['DD-MM-YYYY', 'YYYY/MM/DD', 'DD.MM.YYYY', 'shortDate'];
+  private format = this.formats[0];
 
-export class AppComponent { }
+  private dateOptions: any = {
+    formatYear: 'YY',
+    startingDay: 1
+  };
+
+  private opened: boolean = false;
+
+  public getDate(): number {
+    return this.dt && this.dt.getTime() || new Date().getTime();
+  }
+}
