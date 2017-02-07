@@ -55,11 +55,6 @@ export class TaigaAPIServices {
 
   };
 
-  // TODO
-  public getTaigaParams(): any {
-    return this.taigaParams;
-  }
-
   /**
    * ----------------------------------------------------------------------------------
    * Get taiga AUTH_TOKEN used in all subsequent taiga API calls
@@ -88,10 +83,6 @@ export class TaigaAPIServices {
    *
    */
   public clearAuthToken() {
-
-    // TODO
-    console.log("CLEARED AuthToken");
-
     this.taigaParams.authToken = null;
   };
 
@@ -208,7 +199,7 @@ export class TaigaAPIServices {
               .map((res: any) => res.json())
               .subscribe(
               (res: any) => {
-                var actualPoints = res.attributes_values[2];
+                var actualPoints = res.attributes_values[3];
 
                 if (actualPoints === undefined) {
                   actualPoints = null;

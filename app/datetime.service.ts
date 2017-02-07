@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 
 @Injectable()
-export class DateTimeService {
+export class DateTimeServices {
 
   private dtModel = {
     minDate: new Date(null),
     maxDate: new Date(2020, 5, 22),
     dtStart: new Date(null),
     dtEnd: new Date(null),
+
     dtOptions: {
       formatYear: 'yy',
       startingDay: 1

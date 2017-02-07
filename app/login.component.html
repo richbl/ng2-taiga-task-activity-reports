@@ -62,7 +62,6 @@
               <div class="btn-group">
                 <label [(ngModel)]="checkModel.duane" class="btn btn-primary" btnCheckbox>Duane</label>
                 <label [(ngModel)]="checkModel.troje" class="btn btn-primary" btnCheckbox>Troje</label>
-                <label [(ngModel)]="checkModel.bfey" class="btn btn-primary" btnCheckbox>Brett</label>
                 <label [(ngModel)]="checkModel.richbl" class="btn btn-primary" btnCheckbox>Rich</label>
               </div>
             </div>
@@ -99,7 +98,7 @@
 
       <div class="modal-footer">
         <div id="release-version">
-          <a href="https://github.com/richbl?tab=repositories">v0.7.0</a>
+          <a href="https://github.com/richbl?tab=repositories">{{appVersion}}</a>
         </div>
 
         <button class="btn btn-warning" type="button" (click)="onClickReset()">Reset</button>

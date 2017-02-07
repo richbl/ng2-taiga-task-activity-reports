@@ -25,20 +25,6 @@ export class Results implements OnInit {
    */
   ngOnInit() {
 
-    // TODO
-    console.log("zzzz");
-
-    if (!this.taigaAPI.hasAuthToken()) {
-      console.log("----> HEAD TO LOGIN"); // TODO
-      this.router.navigate(['/login']);
-    };
-
-    // TODO
-    console.log("XXXXX");
-
-    var zz = this.taigaAPI.getTaigaParams();
-    console.log(zz);
-
     this.alerts.clearAlerts();
 
     // generate charting results through the taiga API (the first call after authentication)

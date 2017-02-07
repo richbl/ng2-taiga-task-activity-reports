@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-// import {AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
 
 @Injectable()
 export class Alerts {

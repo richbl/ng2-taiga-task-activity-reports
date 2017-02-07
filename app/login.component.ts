@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
+import {Inject} from '@angular/core';
 import {Headers, RequestOptions} from '@angular/http';
 import {Router} from '@angular/router';
 
-
-import {Dlg} from './dlg.service';
-import {DateTimeService} from './datetime.service';
 import {Alerts} from './alerts.service';
+import {Dlg} from './dlg.service';
+import {DateTimeServices} from './datetime.service';
 import {TaigaAPIServices} from './taigaapi.service';
+import {AppDetailsServices} from './app.details.service';
 
 @Component({
   selector: 'login',
@@ -18,6 +19,8 @@ export class Login implements OnInit {
   private dlgModel: any = null;
   private checkModel: any = null;
 
+  private appVersion: any = null;
+
   private dtStart: Date = null;
   private dtEnd: Date = null;
   private dtMinDate: Date = null;
@@ -25,7 +28,7 @@ export class Login implements OnInit {
   /**
    * ----------------------------------------------------------------------------------
    */
-  constructor(private taigaAPI: TaigaAPIServices, private alerts: Alerts, private dlg: Dlg, private dt: DateTimeService, private router: Router) {
+  constructor(private appDetails: AppDetailsServices, private taigaAPI: TaigaAPIServices, private alerts: Alerts, private dlg: Dlg, private dt: DateTimeServices, private router: Router) {
 
     this.dlgModel = dlg.getDlgModel();
     this.checkModel = dlg.getCheckModel();
@@ -36,11 +39,7 @@ export class Login implements OnInit {
 
     this.dlgModel.radio = '1';
 
-    // TODO
-    this.dlgModel.projecturl = "https://public.businesslearninginc.com";
-    this.dlgModel.projectname = "CERTAIN Hub Reporting";
-    this.dlgModel.username = "richbl";
-    this.dlgModel.password = "acm44655!!";
+    this.appDetails.getAppVersion(this, this.getVersionResults);
 
   };
 
@@ -48,8 +47,6 @@ export class Login implements OnInit {
    * ----------------------------------------------------------------------------------
    */
   ngOnInit() {
-
-    console.log("NOW IN LOGIN"); // TODO
 
     this.alerts.clearAlerts();
     this.taigaAPI.clearAuthToken();
@@ -130,6 +127,14 @@ export class Login implements OnInit {
    */
   showResults(self: any) {
     self.router.navigate(['/results']);
+  };
+
+  /**
+   * ----------------------------------------------------------------------------------
+   * Callback function on completion of getAppVersion()
+   */
+  getVersionResults(self: any, result: any) {
+    self.appVersion = result;
   };
 
   /**

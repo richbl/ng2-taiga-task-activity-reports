@@ -14,7 +14,6 @@ export class Dlg {
   private checkModel = {
     duane: false,
     troje: false,
-    bfey: false,
     richbl: false
   };
 
@@ -48,7 +47,6 @@ export class Dlg {
 
     this.checkModel.duane = false;
     this.checkModel.troje = false;
-    this.checkModel.bfey = false;
     this.checkModel.richbl = false;
 
   };
