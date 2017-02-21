@@ -11,7 +11,7 @@ This web-based application works in conjunction with an Agile project management
 
 This application uses several libraries, including:
 
--  [Angular Framework](https://angular.io/) (Angular 2.0.0-rc.4)
+-  [Angular Framework](https://angular.io/) (Angular 2.4.4)
 -  [Ng2-Bootstrap](https://github.com/valor-software/ng2-bootstrap) components
 - [Highcharts](http://www.highcharts.com/) charting library
 
@@ -41,17 +41,17 @@ Node.js and npm are essential to Angular 2 development. <a href="https://docs.np
 by running `node -v` and `npm -v` in a terminal/console window.
 Older versions produce errors.
 
-> This project was originally developed using Angular 2.0.0-RC4.
+> This project was developed using Angular 2.4.4.
 
 ### Ng2-Bootstrap
 The [ng2-bootstrap](https://github.com/valor-software/ng2-bootstrap) library is available as an [npm package](https://www.npmjs.com/package/ng2-bootstrap), which makes it extremely easy to implement in this or any Angular Framework project. When first installing npm packages, project dependencies should install the latest package.
 
-> This project was originally developed using Ng-Bootstrap 1.0.23.
+> This project was developed using Ng-Bootstrap 1.3.0.
 
 ### Highcharts
 The [Highcharts](http://www.highcharts.com/) charting library for Angular 2 is available as an [npm package](https://www.npmjs.com/package/angular2-highcharts), which makes it extremely easy to implement in this or any Angular Framework project. When first installing npm packages, project dependencies should install the latest package.
 
-> This project was originally developed using Angular2-highcharts 0.2.1.
+> This project was developed using Angular2-highcharts ^0.4.3.
 
 ## Getting Started
 
