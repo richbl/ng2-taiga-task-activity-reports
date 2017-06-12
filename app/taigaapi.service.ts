@@ -19,7 +19,9 @@ export class TaigaAPIServices {
     users: null as string[], // list of users to gather task summaries
     userName: null as string, // user name (derived)
     userCount: 0 as number, // count of users passed in (derived)
-    userID: null as string // user ID of current user (derived)
+    userID: null as string, // user ID of current user (derived)
+    customAttributeId: 0 as number, // ID of custom user story attribute (derived)
+    customAttributeText: 'Total time spent (h)' // custom user story attribute used to track task hours
   };
 
   private chartObjects: Object = [];
@@ -155,7 +157,21 @@ export class TaigaAPIServices {
 
         userParams.userID = result[0].id;
         this.alerts.showAlert("User ID retrieval for " + userParams.userName + " succeeded.", 0);
-        this.getUserStories(taigaParams, userParams, this.getResults);
+
+        this.getCustomAttributeId(taigaParams)
+          .subscribe(
+          (res: any) => {
+
+            // find custom user story attribute ID, used for tracking task hours
+            var result = res.filter((item: any) => item.name == taigaParams.customAttributeText);
+            taigaParams.customAttributeId = result[0].id
+
+            this.getUserStories(taigaParams, userParams, this.getResults);
+          },
+          (err: any) => {
+            this.alerts.showAlert("Unable to retrieve user story custom attributes.", 2);
+          });
+
       },
       (err) => {
         this.alerts.showAlert("Unable to retrieve user ID for " + userParams.userName + ".", 2);
@@ -199,7 +215,7 @@ export class TaigaAPIServices {
               .map((res: any) => res.json())
               .subscribe(
               (res: any) => {
-                var actualPoints = res.attributes_values[3];
+                var actualPoints = res.attributes_values[taigaParams.customAttributeId];
 
                 if (actualPoints === undefined) {
                   actualPoints = null;
@@ -232,6 +248,14 @@ export class TaigaAPIServices {
         this.alerts.showAlert("Unable to retrieve user stories.", 2);
       };
 
+  };
+
+  /**
+   * ----------------------------------------------------------------------------------
+   * Get user story custom attribute objects
+   */
+  getCustomAttributeId(taigaParams: any) {
+    return this.httpGet(taigaParams.website + '/api/v1/userstory-custom-attributes' + '?project=' + taigaParams.projectID)
   };
 
   /**
