@@ -86,6 +86,10 @@ export class Login implements OnInit {
   onClickOK() {
 
     var startDate = this.dt.toTaigaFormat(this.dtStart);
+
+    // make sure end date includes entire time of day
+    this.dtEnd.setHours(23, 59, 59, 999);
+
     var endDate = this.dt.toTaigaFormat(this.dtEnd);
     var users = [];
 

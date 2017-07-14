@@ -333,8 +333,8 @@ export class TaigaAPIServices {
 
     for (var i = 0; i < arrayLength; i++) {
 
-      estimatedPoints[i] = parseInt(data[i]['estimated_points']) || null;
-      actualPoints[i] = parseInt(data[i]['actual_points']) || null;
+      estimatedPoints[i] = parseFloat(data[i]['estimated_points']) || null;
+      actualPoints[i] = parseFloat(data[i]['actual_points']) || null;
 
       diffPoints[i] = actualPoints[i] - estimatedPoints[i];
 

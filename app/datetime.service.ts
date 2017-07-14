@@ -43,14 +43,6 @@ export class DateTimeServices {
    * ----------------------------------------------------------------------------------
    *
    */
-  public setEndDate(endDate: Date) {
-    this.dtModel.dtEnd = endDate;
-  };
-
-  /**
-   * ----------------------------------------------------------------------------------
-   *
-   */
   public getStartDate() {
     return this.dtModel.dtStart;
   };
