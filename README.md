@@ -17,16 +17,13 @@ This application uses several libraries, including:
 
 > Note that this application is a refactor of an Angular 1.0-based project, [located here](https://github.com/richbl/taiga.io-scripts).
 
-
 ## Login Page
-![image](https://cloud.githubusercontent.com/assets/10182110/18178057/adfe7dd8-7031-11e6-938f-ff2a69bdb1a1.png)
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://cloud.githubusercontent.com/assets/10182110/18178057/adfe7dd8-7031-11e6-938f-ff2a69bdb1a1.png"><source media="(prefers-color-scheme: light)" srcset="https://cloud.githubusercontent.com/assets/10182110/18178057/adfe7dd8-7031-11e6-938f-ff2a69bdb1a1.png"><img src="https://cloud.githubusercontent.com/assets/10182110/18178057/adfe7dd8-7031-11e6-938f-ff2a69bdb1a1.png"></picture>
 ## Results Page
-![image](https://cloud.githubusercontent.com/assets/10182110/18178108/ddb90f66-7031-11e6-83fb-1dacf6e5a09c.png)
-
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://cloud.githubusercontent.com/assets/10182110/18178108/ddb90f66-7031-11e6-83fb-1dacf6e5a09c.png"><source media="(prefers-color-scheme: light)" srcset="https://cloud.githubusercontent.com/assets/10182110/18178108/ddb90f66-7031-11e6-83fb-1dacf6e5a09c.png"><img src="https://cloud.githubusercontent.com/assets/10182110/18178108/ddb90f66-7031-11e6-83fb-1dacf6e5a09c.png"></picture>
 
 ## Based on Angular 2-Quickstart
 This repository is based on the [Angular 2-Quickstart](https://github.com/valor-software/angular2-quickstart), which is provided by Valor Software to demo a simple implementation of their [Native Angular 2 Directives for Bootstrap](http://valor-software.com/ng2-bootstrap/#/).
-
 
 ## Prerequisites
 
