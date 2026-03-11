@@ -12,7 +12,7 @@
     "@angular/common": "19.2.16",
     "@angular/compiler": "2.4.4",
     "@angular/core": "10.2.5",
-    "@angular/forms": "2.4.4",
+    "@angular/forms": "21.2.2",
     "@angular/http": "2.4.4",
     "@angular/platform-browser": "2.4.4",
     "@angular/platform-browser-dynamic": "2.4.4",
